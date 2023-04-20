@@ -1,0 +1,792 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+//declare 6 global arrays to store member info
+string ID[300];
+string fname[300];
+string surname[300];
+string address[300];
+int mobile[300];
+int age[300];
+
+int n=0; //declare global variable to keep track of number of employees
+#include <string>
+
+void store() 
+//register new member
+{
+	string ans,answer,TID;
+	bool found;
+	int x,y;
+	for (x = 0; x <= n; x++)
+	{
+		system("cls");
+		cout << "                MEMBER REGISTRATION" << endl;
+		cout << " " << endl;
+		cout << "Enter Member ID                    :";
+		cin >> TID;
+		found = false;
+		for (y = 0; y <= 299; y++) 
+		//check avilibility of member ID
+		{
+			if (TID == ID[y])
+			{
+				cout << "Member ID Already exist " << endl;
+				system("pause");
+				found = true;
+				y = 300;
+
+			}
+
+		} //end for
+		if (found == false)
+		{
+
+			ID[x] = TID;
+			cout << "Enter First Name of The Member     :";
+			cin >> fname[x];
+			cout << "Enter Sur name Of The Member       :";
+			cin >> surname[x];
+			cout << "Enter Adress Of The Member         :";
+			cin >> address[x];
+			cout << "Enter Contact Number Of The Member :";
+			cin >> mobile[x];
+			cout << "Enter Age Of The Member            :";
+			cin >> age[x];
+			n++;
+			cout << "Do You Want To Add Another Member ?  [Y/N]";
+			cin >> answer;
+			if (answer == "N" || answer == "n")
+			{
+				x = n;
+			}
+		}
+	}//end for 
+}//end register
+
+void display()
+//display all member's details
+{
+	int x;
+	system("cls");
+	cout << "                   LIST OF MEMBERS"<<endl;
+	cout << " " << endl;
+	x = 0;
+	while (x<n)
+	{
+		cout << ID[x];
+		cout << "\t";
+		cout << fname[x];
+		cout << "\t";
+		cout << surname[x];
+		cout << "\t";
+		cout << address[x];
+		cout << "\t";
+		cout << mobile[x];
+		cout << "\t";
+		cout << age[x] << endl;
+		x++;
+	}//end for
+	system("pause");
+
+}//end display
+
+void search(string searchkey)
+//search members using their Member ID
+{
+	int x;
+	bool found;
+	found = false;
+	for (x = 0; x <= 299; x++)
+	{
+		if (searchkey == ID[x])
+		{
+			cout << "First name     :" << fname[x] << endl;
+			cout << "Sur name       :" << surname[x] << endl;
+			cout << "Address        :" << address[x] << endl;
+			cout << "Contact number :" << mobile[x] << endl;
+			cout << "Age            :" << age[x] << endl;
+			system("pause");
+			found = true;
+			x = 301;
+		}
+
+		if (found == false)
+		{
+			cout << "Member not found.Please check and re enter member ID" << endl;
+			x = 300;
+			system("pause");
+		}
+	}
+
+}//end search
+
+void update()
+//update member details
+{
+	string skey, answer;
+	int x;
+	bool found;
+	system("cls");
+	cout << "             Update Member Details" << endl;
+	cout << " " << endl;
+	cout << "Enter member ID  :";
+	cin >> skey;
+	for (x = 0; x <= 299; x++)
+	{
+		if (skey == ID[x])
+		{
+			found = true;
+
+			cout << "First name   :" << fname[x] << endl;
+			cout << "Do you want to change first name? [Y/N] " << endl;
+			cin >> answer;
+			if (answer == "Y" || answer == "y")
+			{
+				cout << "Enter new first name     :";
+				cin >> fname[x];
+			}
+			cout << "sur name    :" << surname[x] << endl;
+			cout << "Do you want to change sur name? [Y/N] " << endl;
+			cin >> answer;
+			if (answer == "Y" || answer == "y")
+			{
+				cout << "Enter new sur name       :";
+				cin >> surname[x];
+			}
+			cout << "Adress      :" << address[x] << endl;
+			cout << "Do you want to change adress?    [Y/N] " << endl;
+			cin >> answer;
+			if (answer == "Y" || answer == "y")
+			{
+				cout << "Enter adress name        :";
+				cin >> address[x];
+			}
+			cout << "Contact number   :" << mobile[x] << endl;
+			cout << "Do you want to contact number?    [Y/N] " << endl;
+			cin >> answer;
+			if (answer == "Y" || answer == "y")
+			{
+				cout << "Enter new contact number :";
+				cin >> mobile[x];
+			}
+			cout << "Age              :" << age[x] << endl;
+			cout << "Do you want to change age?        [Y/N] " << endl;
+			cin >> answer;
+			if (answer == "Y" || answer == "y")
+			{
+				cout << "Enter age                 :";
+				cin >> age[x];
+			}
+		}
+		else
+		if (found == false)
+		{
+			cout << "Member not found.Please check and re enter member ID" << endl;
+			x = 300;
+			system("pause");
+		}
+	}
+}//end update
+
+int main()
+//main menu of member management system
+{
+	string UN, pass;
+	char ch;
+	int choice;
+
+	cout << "ATLAS GYMNASYAM-USER LOGIN" << endl;
+	cout << " " << endl;
+	cout << "User Name : ";
+	cin >> UN;
+	if (UN != "admin")
+	{
+		cout << "Invalid Username" << endl;
+		system("pause");
+	}
+	else
+	{
+		cout << "Password  :";
+		//convert input charecters into stars
+		ch = _getch();
+		while (ch != 13)
+		{
+			pass.push_back(ch);
+			cout << '*';
+			ch = _getch();
+		}
+		if (pass != "1234"){
+			cout << "\nInvalid Password \n";
+			system("pause");
+		}
+		else
+		{
+			choice = 0;
+			while (choice != 6)
+			{
+				string skey;
+				system("cls");
+				cout << "             WELCOME " << endl;
+				cout << "          ATLAS GYMNASYAM" << endl;
+				cout << " " << endl;
+				cout << "1-Add New Member" << endl;
+				cout << "2-View Members" << endl;
+				cout << "3-Search Member" << endl;
+				cout << "4-Update Member Deatails" << endl;
+				cout << "5-Exit" << endl;
+				cout << "Enter Your Choice [1/2/3/4/5]";
+				cin >> choice;
+				if (choice<1 || choice>5)
+				{
+					cout << "Invalid choice.Enter number between 1 and 5" << endl;
+					system("pause");
+				}
+				if (choice == 1)
+					store();
+				else
+				if (choice == 2)
+					display();
+				else
+				if (choice == 3)
+				{
+					system("cls");
+					cout << "                  SEARCH MEMBER DETAILS" << endl;
+					cout << " " << endl;
+					cout << "Enter member ID  :";
+					cin >> skey;
+					search(skey);
+				}
+				else
+				if (choice == 4)
+					update();
+					else
+					if (choice == 5)
+					{
+						system("cls");
+						cout << "            E     N     D" << endl;
+						system("pause");
+						choice = 6;
+					}
+				}//end while
+			}//end if
+return 0;
+	}
+}//end main
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+//Declare arrays
+string Item[50][4];
+string Bill[50][5];
+int subtotal, count;
+//item id, name, quantity, price
+
+//Add item
+void additem()
+{
+  int x,y;
+  string answer;
+
+  for (x=0; x < 5; x++)
+  {
+    for (y=0; y < 51; y++)
+    {
+
+      ///check the x boundary. Remove the x for loop and add static values
+    cout<<"Add New Item";
+    cout << "\n";
+    cout<<"Item ID :";
+    cin>>Item[y][x];
+    cout<<"Item Name :";
+    cin>>Item[y][x+1];
+    cout<<"Quantity :";
+    cin>>Item[y][x+2];
+    cout<<"Price :";
+    cin>>Item [y][x+3];
+    
+    cout<<"Do you want add any Items? (Y/N): ";
+    cin>>answer; 
+
+    if(answer =="N" || answer =="n")
+    {
+        //break;
+        y=52;
+        x=10;
+    }
+
+    }
+    
+  }
+}
+
+//show Items
+void showitem()
+{
+int x,y,n;
+
+
+
+//check the number of data rows in 2d array
+// get that value to int n 
+//remove the for loop and add while loop, while(x <=n)
+
+cout<<"Show added all Details";
+cout<<"\n";
+ cout<<"| ID | Name | Price | Quantity |";
+     cout<<"\n";
+     cout<<"--------------------------------";
+     cout<<"\n";
+  for (x=0; x < 50; x++) 
+  {
+     
+     cout<<Item[x][0];
+     cout<<" | ";
+     cout<<Item[x][1];
+     cout<<" | ";
+     cout<<Item[x][2];
+     cout<<" | ";
+     cout<<Item[x][3];
+     cout<<" | ";
+      cout<<"\n";
+  }
+ 
+} 
+
+//Search item
+void searchitem()
+{
+  //system "cls"
+  string key;
+  int x;
+  cout<<"Please enter Item ID or Name";
+  cin>>key;
+
+  for(x=0; x<50; x++)
+  {
+
+  
+    //Item Id
+    if(key == Item[x][0])
+    {
+      cout<<"| ID | Name | Price | Quantity |";
+     cout<<"\n";
+     cout<<"--------------------------------";
+     cout<<"\n";
+      cout<<Item[x][0];
+     cout<<" | ";
+     cout<<Item[x][1];
+     cout<<" | ";
+     cout<<Item[x][2];
+     cout<<" | ";
+     cout<<Item[x][3];
+     cout<<" | ";
+      cout<<"\n";
+    }
+    //Item name
+    else if (key == Item[x][1])
+    {
+      cout<<"| ID | Name | Price | Quantity |";
+     cout<<"\n";
+     cout<<"--------------------------------";
+     cout<<"\n";
+      cout<<Item[x][0];
+     cout<<" | ";
+     cout<<Item[x][1];
+     cout<<" | ";
+     cout<<Item[x][2];
+     cout<<" | ";
+     cout<<Item[x][3];
+     cout<<" | ";
+      cout<<"\n";
+    }
+    //Do you want to search another item ?
+  }
+}
+
+//Remove item
+void removeitem()
+{
+
+}
+
+void updateitem()
+{
+  // Update Item details - topic
+  string key;
+  int x;
+  cout<<"Please enter Item ID or Name";
+  cin>>key;
+
+  for(x=0; x<50; x++)
+  {
+    //Item Id
+    if(key == Item[x][0])
+    {
+      cout<<"Item ID :";
+    cin>>Item[x][0];
+    cout<<"Item Name :";
+    cin>>Item[x][1];
+    cout<<"Quantity :";
+    cin>>Item[x][2];
+    cout<<"Price :";
+    cin>>Item [x][3];
+    }
+    //else , for name
+  }
+
+}
+
+
+void createbill()
+{
+  //cls
+  string key,answer;
+  int x,n,qty,unitprice,total;
+  
+  n=0;
+  while(n<1)
+  {
+
+  cout<<"Please enter Item ID or Name :";
+  cin>>key;
+  for(x=0; x<50; x++)
+  {
+
+  
+    //Item Id
+    if(key == Item[x][0])
+    {
+      cout<<"| ID | Name | Price | Quantity |";
+     cout<<"\n";
+     cout<<"--------------------------------";
+     cout<<"\n";
+      cout<<Item[x][0];
+     cout<<" | ";
+     cout<<Item[x][1];
+     cout<<" | ";
+     cout<<Item[x][2];
+     cout<<" | ";
+     cout<<Item[x][3];
+     cout<<" | ";
+      cout<<"\n";
+      count=x;
+    }
+    //Item name
+    else if (key == Item[x][1])
+    {
+      cout<<"| ID | Name | Price | Quantity |";
+     cout<<"\n";
+     cout<<"--------------------------------";
+     cout<<"\n";
+      cout<<Item[x][0];
+     cout<<" | ";
+     cout<<Item[x][1];
+     cout<<" | ";
+     cout<<Item[x][2];
+     cout<<" | ";
+     cout<<Item[x][3];
+     cout<<" | ";
+      cout<<"\n";
+      count=x;
+    }
+
+    
+
+  }
+
+    x = count;
+    cout<<"Please enter the quantity : ";
+    cin>>qty; 
+    cout<<"\n";
+
+    Bill[x][0] = Item[x][0];// item id
+    Bill[x][1] = Item[x][1];// item name
+    Bill[x][2] = to_string(qty);// customer quantity
+    Bill[x][3] = Item[x][3];// unit price
+    Bill[x][4] = stoi(Bill[x][3]) * qty; //total
+
+    //subtotal = subtotal + total;
+
+        cout<<" | ";
+        cout<<Bill[x][0];
+        cout<<" | ";
+        cout<<Bill[x][1];
+        cout<<" | ";
+        cout<<Bill[x][2];
+        cout<<" | ";
+        cout<<Bill[x][3];
+        cout<<" | ";
+        cout<<Bill[x][4];
+        cout<<" | \n";
+
+        cout<<"Sub total is : "<<subtotal;
+
+    n++;
+    cout<<"Do you want to purchase another item ? (Y / N)";
+    cin>>answer; 
+
+    if(answer == "Y" || answer == "y")
+    {
+      n=0;
+    }
+    else if (answer == "N" || answer =="n")
+    {
+      cout<<"| ID | Name | Quantity | Unit price | Toal |";
+      for(x=0;x<50;x++)
+      {
+        cout<<Bill[x][0];
+        cout<<" | ";
+        cout<<Bill[x][1];
+        cout<<" | ";
+        cout<<Bill[x][2];
+        cout<<" | ";
+        cout<<Bill[x][3];
+        cout<<" | ";
+       // cout<<Bill[x][4];
+        cout<<" | ";
+
+      }
+
+     // cout<<"Sub total is :"<< subtotal;
+      //n=2;
+    }
+
+  }
+}
+
+
+
+
+
+
+
+
+
+//Login and main menus
+int main() 
+{
+  string un,pw;
+  int count = 0;
+
+  while (count <1)
+  {
+  cout<<"please enter the following details"<<endl;
+    cout<<"USERNAME :";
+    cin>>un;
+    cout<<"PASSWORD :";
+	cin>>pw;
+
+  //admin login
+  if(un=="admin" && pw=="admin") 
+  {
+    
+    int choice = 0;
+
+    while (choice<9)
+    {
+    //system("cls");
+      cout<<"\n\t\t-----Sudu Araliya - Super Mart-----\n";
+    cout<<"\n\t\t-----No 101 Colombo - Hanwella Low Lavel Rd, Kaduwela--\n" ;
+    cout<<"\n\t\t----- Tel 012 500000 / 0114 000000-----\n";
+    
+    cout<<"\n\t\t=====================================================\n";
+    cout<<"\n\t\t1.Create Bill\n\n";
+    cout<<"\t\t2.Add Item\n\n";
+    cout<<"\t\t3.Remove Item\n\n";
+    cout<<"\t\t4.Search Item\n\n";
+    cout<<"\t\t5.Update Item\n\n";
+    cout<<"\t\t6.Show Item Details\n\n";
+    cout<<"\t\t7.Show Bill\n\n";
+    cout<<"\t\t8.Logout\n\n";
+    cout<<"\t\tPlease Enter Required Option: ";
+    cin >> choice;
+
+    if (choice == 1)
+    {
+      createbill();
+    }
+    else if (choice == 2)
+    {
+      additem();
+      //done
+    }
+    else if (choice ==3 )
+    {
+      removeitem();
+    }
+    else if (choice == 4)
+    {
+      searchitem();
+      //done
+    }
+    else if (choice == 5)
+    {
+      updateitem();
+      //done
+    }
+     else if (choice == 7)
+    {
+      //showbill();
+      //done
+    }
+        else if (choice == 7)
+    {
+      showitem();
+      //done
+    }
+    else if (choice == 8)
+          choice = 10;
+
+
+    }
+
+  }
+  //user login
+  else if (un=="user" && pw=="user")
+  {
+    // search item, view bill, purchase item, logout
+  }
+  else
+  cout<<"UN and PW is incorrect";
+}
+
+
+}
+
+
+
+/* admin = cashier (all functions),
+  user = custoemr (search item, purchase item), 
+  finance login (check bill, chek items)
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
